@@ -54,7 +54,8 @@ class Twod
 
     public function nyiko(){
         $data = [
-            "data" => [ "01","12","23","34", "45",'56','67','78','89','90' ]
+            "data" => ["09", "01", "12", "23", "34", "45", "56", "67", "78", "89",
+                "90", "10", "21", "32", "43", "54", "65", "76", "87", "98"]
         ];
         return response()->json($data,200);
     }
@@ -222,25 +223,46 @@ class Twod
     }
 
     public function even(){
-        $data = [
-            "data" => [
-                '00', '02', '04', '06', '08', '20', '22', '24', '26', '28','40','42', '44',
-                '46', '48', '60', '62', '64', '66', '68', '80','82','84','86','88'
-            ]
-        ];
+         
+        $data = array();
+        $index = 0;
+        for ($i = 0; $i < 10; $i++) {
+            if ($i % 2 != 0) {
+                continue;
+            }
+            for ($j = 0; $j < 10; $j++) {
+                if ($j % 2 != 0) {
+                    continue;
+                }
+                $data[$index] =  "$i$j";
+                ++$index;
+            }
+        }
 
-        return response()->json($data,200);
+        return response()->json([
+            'data'=> $data
+        ],200);
     }
 
     public function odd(){
-        $data = [
-            "data" => [
-                '11','13','15','17','19','31','33','35','37','39','51','53','55','57','59','71',
-                '73','75','77','79', '91','93','95','97','99'
-            ]
-        ];
+        $data = array();
+        $index = 0;
+        for ($i = 0; $i < 10; $i++) {
+            if ($i % 2 == 0) {
+                continue;
+            }
+            for ($j = 0; $j < 10; $j++) {
+                if ($j % 2 == 0) {
+                    continue;
+                }
+                $data[$index] = "$i$j";
+                ++$index;
+            }
+        }
 
-        return response()->json($data,200);
+        return response()->json([
+            'data'=>$data
+        ],200);
     }
 
     public function evenodd(){
